@@ -1,7 +1,12 @@
 {
  "description" : "Provides Wowza Connection Stats",
  "command" : "node index.js --uri=$(uri) --repeat=$(repeat) --delay=1000"
- "metrics" : ["WOWZA_CONNECTIONS_CURRENT", "WOWZA_CONNECTIONS_TOTAL", "WOWZA_CONNECTIONS_BYTES_IN", "WOWZA_CONNECTIONS_BYTES_OUT"],
+ "metrics" : [
+              "WOWZA_CONNECTIONS_CURRENT", 
+              "WOWZA_CONNECTIONS_TOTAL", 
+              "WOWZA_CONNECTIONS_BYTES_IN", 
+              "WOWZA_CONNECTIONS_BYTES_OUT"
+             ],
 
  "postExtract" : "npm install",
  "ignore" : "node_modules",
