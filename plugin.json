@@ -10,7 +10,7 @@
  "paramSchema": [
         {
             "title": "Source",
-            "name": "string",
+            "name": "source",
             "description": "Source to use for this connection. Defaults to the local hostname",
             "type": "string",
             "default": "Wowza_stats",
