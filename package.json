@@ -1,31 +1,28 @@
 {
-	"name": "graphdat-httpcheck-plugin",
+	"name": "boundary-wowza-connections-plugin",
 	"version": "0.0.1",
 	"private": false,
-	"description": "HTTP Check plugin for Graphat to poll a URL and report back its response time",
+	"description": "Plugin to check current connections of a Wowza Streaming Server.",
 	"main": "index.js",
 	"devDependencies": {},
 	"dependencies": {
-		"async": "0.2.x",
-		"graphdat-plugin-tools" : "0.0.1",
-		"request" : "2.27.x",
-		"underscore": "1.5.x"
+		"jsdom" : "4.0.2",
+		"optimist" : "0.6.1",
+		"request" : "2.53.0"
 	},
 	"repository": {
 	"type": "git",
-	"url": "https://github.com/graphdat/plugin-httpcheck"
+	"url": "https://github.com/greyhammer/boundary-wowza-connections-plugin"
 	},
 	"keywords": [
-		"graphdat",
-		"plugin",
-		"http",
-		"response",
-		"poll"
+		"wowza",
+		"stats",
+		"connections"
 	],
-	"author": "Graphdat <support@graphdat.com>",
+	"author": "Istream IT DEPT <itdept@interviewstream.com>",
 	"license": "Apache v2",
 	"bugs": {
-		"url": "https://github.com/graphdat/plugin-httpcheck/issues"
+		"url": "https://github.com/greyhammer/boundary-wowza-connections-plugin/issues"
 	},
-	"engine": "node >= 0.8.1"
+	"engine": "node >= 0.12.0"
 }
