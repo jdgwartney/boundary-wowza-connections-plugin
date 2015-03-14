@@ -5,10 +5,10 @@ Plugin to check current connections of a Wowza Streaming Server.
 3/14/15
 
 ### Prerequisites: 
-node
-npm
+*node
+*npm
 
 ### Dependencies:
-jsdom
-optimist
-request
+*jsdom
+*optimist
+*request
