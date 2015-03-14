@@ -1,5 +1,4 @@
 # boundary-wowza-connections-plugin
----
 Plugin to check current connections of a Wowza Streaming Server.
 
 ### Prerequisites: 
