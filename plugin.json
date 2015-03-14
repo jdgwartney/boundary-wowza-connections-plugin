@@ -1,6 +1,6 @@
 {
  "description" : "Provides Wowza Connection Stats",
- "command" : "node index.js $(url)",
+ "command" : "node index.js $(uri) $(repeat) --delay=1000"
  "metrics" : ["WOWZA_CONNECTIONS_CURRENT", "WOWZA_CONNECTIONS_TOTAL", "WOWZA_CONNECTIONS_BYTES_IN", "WOWZA_CONNECTIONS_BYTES_OUT"],
 
  "postExtract" : "npm install",
@@ -13,22 +13,23 @@
             "name": "string",
             "description": "Source to use for this connection. Defaults to the local hostname",
             "type": "string",
-            "default": "hello",
+            "default": "Wowza_stats",
             "required": true
         },
         {
-            "title": "User",
-            "name": "string",
-            "description": "User name to use to authenticate",
+            "title": "URI",
+            "name": "uri",
+            "description": "URL with username and password in line. Ex. http://username:passsword@127.0.0.1:8086/connectioncounts",
             "type": "string",
-            "default": "joe",
+            "default": "http://username:passsword@127.0.0.1:8086/connectioncounts",
             "required": true
         },
         {
-            "title" : "Password",
-            "name" : "password",
-            "description" : "Password to use to authenticate",
-            "type" : "password",
+            "title": "Interval",
+            "name": "repeat",
+            "description": "Interval to run poll server at.  Defaults to 1000ms = 1 second",
+            "type": "string",
+            "default": "1000",
             "required": true
         }
  ]
