@@ -1,4 +1,4 @@
-# boundary-wowza-connections-plugin
+# WowzaStats-v4
 Plugin to check current connections of a Wowza Streaming Server.
 
 ### Prerequisites
@@ -12,7 +12,7 @@ Plugin to check current connections of a Wowza Streaming Server.
 |:---------|:-------:|:------:|:----:|
 | Required |    +    |        |      |
 
-###@ Dependencies:
+### Dependencies:
 * jsdom@0.2.13
 * optimist
 * request
