@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+//load parameters from file
+var _param = require('./param.json')
+
 
 // Requires.
 // request, jsdom, optimist, all of which can be install with npm.
@@ -15,7 +18,7 @@ var request = require('request'),
     argv = require('optimist').argv;
 
 // Make sure that at least the --uri argument was passed.
-if (argv.uri.length == 0) {
+if (_param.uri.length == 0) {
   console.log('URI Required! Script should be called with one argument which is the URI of the connectioncounts HTTP provider to query.');
   return;
 }
@@ -26,9 +29,9 @@ if (argv.uri.length == 0) {
 var Collector = {
   stats: {},
   get_stats: function(uri, callback) {
-    request({ uri: uri }, function (error, response, body) {
+    request({ uri: _param.uri }, function (error, response, body) {
       if (error && response.statusCode !== 200) {
-        console.log('Error when contacting ' + uri);
+        console.log('Error when contacting ' + _param.uri);
       }
 
       jsdom.env({
@@ -57,10 +60,10 @@ var callDelay = function() {
   Collector.get_stats(argv.uri, function(response) {
     // Print out collected stats.
     //console.log(Collector.stats);
-    console.log('WOWZA_CONNECTIONS_CURRENT ' + Collector.stats.WOWZA_CONNECTIONS_CURRENT + ' ' + argv.msource);
-    console.log('WOWZA_CONNECTIONS_TOTAL ' + Collector.stats.WOWZA_CONNECTIONS_TOTAL + ' Rem-East-v4-Edge-1-WowzaStats')
-    console.log('WOWZA_CONNECTIONS_BYTES_IN ' + Collector.stats.WOWZA_CONNECTIONS_BYTES_IN + ' Rem-East-v4-Edge-1-WowzaStats')
-    console.log('WOWZA_CONNECTIONS_BYTES_OUT ' + Collector.stats.WOWZA_CONNECTIONS_BYTES_OUT + ' Rem-East-v4-Edge-1-WowzaStats')
+    console.log('WOWZA_CONNECTIONS_CURRENT ' + Collector.stats.WOWZA_CONNECTIONS_CURRENT + ' ' + _param.msource);
+    console.log('WOWZA_CONNECTIONS_TOTAL ' + Collector.stats.WOWZA_CONNECTIONS_TOTAL + ' ' + _param.msource)
+    console.log('WOWZA_CONNECTIONS_BYTES_IN ' + Collector.stats.WOWZA_CONNECTIONS_BYTES_IN + ' ' + _param.msource)
+    console.log('WOWZA_CONNECTIONS_BYTES_OUT ' + Collector.stats.WOWZA_CONNECTIONS_BYTES_OUT + ' ' + _param.msource)
   });
 }
 
@@ -68,10 +71,10 @@ var callDelay = function() {
 callDelay();
 
 // Allo repeating at specified interval if --repeat is set.
-if (argv.repeat != undefined) {
+if (_param.repeat != undefined) {
   // Default to every 30 seconds if no delay is specified.
-  if (argv.delay == undefined) {
-    argv.delay = 30000;
+  if (_param.delay == undefined) {
+    _param.delay = 30000;
   }
-  setInterval(callDelay, argv.delay);
+  setInterval(callDelay, _param.delay);
 }
