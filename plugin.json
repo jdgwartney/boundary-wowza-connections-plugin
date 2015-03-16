@@ -11,7 +11,7 @@
  "postExtract" : "npm install",
  "ignore" : "node_modules",
 
- "paramArray": { "itemTitle": [ "source" ], "schemaTitle": "Example multiple connection configuration" },
+
  "paramSchema": [
         {
             "title": "Source",
