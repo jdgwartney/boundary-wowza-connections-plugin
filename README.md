@@ -17,8 +17,6 @@ Plugin to check current connections of a Wowza Streaming Server.
 * optimist
 * request
 
-- [How to install node.js?](https://help.boundary.com/hc/articles/202360701)
-
 ### Plugin Setup
 None
 
