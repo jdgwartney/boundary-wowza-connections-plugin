@@ -25,6 +25,15 @@ None
 |Field Name |Description                                                                                           |
 |:----------|:-----------------------------------------------------------------------------------------------------|
 |URL        |The URL of the server to poll. Include Username and password. Ex.                                     |
-|           |                                            http://username:passsword@127.0.0.1:8086/connectioncounts |
+|           |--------------------------------------------http://username:passsword@127.0.0.1:8086/connectioncounts |
 |Interval   |Interval to run poll server at.  Defaults to 1000ms = 1 second                                        |
+|Delay      |Delay to run the poll at.  Defaults to 1000ms = 1 second                                              |
 |Source     |The Source to display in the legend for the Wowza data.  It will default to the hostname of the server|
+
+
+### Metrics
+The following metrics are returned. 
+ * WOWZA_CONNECTIONS_CURRENT
+ * WOWZA_CONNECTIONS_TOTAL
+ * WOWZA_CONNECTIONS_BYTES_IN
+ * WOWZA_CONNECTIONS_BYTES_OUT
