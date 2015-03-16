@@ -28,7 +28,7 @@ None
 |           |--------------------------------------------http://username:passsword@127.0.0.1:8086/connectioncounts |
 |Interval   |Interval to run poll server at.  Defaults to 1000ms = 1 second                                        |
 |Delay      |Delay to run the poll at.  Defaults to 1000ms = 1 second                                              |
-|Source     |The Source to display in the legend for the Wowza data.  It will default to the hostname of the server|
+|Source     |The Source to display in the legend for the Wowza data.  It will default to Wowza-Stats               |
 
 
 ### Metrics
