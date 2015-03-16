@@ -8,11 +8,11 @@ Plugin to check current connections of a Wowza Streaming Server.
 | Supported |   v   |    v    |    v    |  v   |
 
 
-|  Runtime | node.js | npm | Python | Java |
-|:---------|:-------:|:---:|:------:|:----:|
-| Required |    +    |  +  |        |      |
+|  Runtime | node.js | Python | Java |
+|:---------|:-------:|:------:|:----:|
+| Required |    +    |        |      |
 
-### Dependencies:
+### NPM Dependencies:
 * jsdom@0.2.13
 * optimist
 * request
