@@ -18,7 +18,7 @@ Plugin to check current connections of a Wowza Streaming Server.
 * request
 
 ### Plugin Setup
-None
+Works with Wowza Server v4. Requires WowzaStreamingEngineManager service to be running, Admin-basic authentication must be setup in the VHOST.XML under the connectioncounts area, and credentials must be set in publish.password.  
 
 #### Plugin Configuration Fields
 
