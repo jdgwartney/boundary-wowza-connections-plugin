@@ -1,4 +1,4 @@
-# boundary-wowza-connections-plugin
+# WowzaStats-v4
 Plugin to check current connections of a Wowza Streaming Server.
 
 ### Prerequisites
@@ -12,21 +12,27 @@ Plugin to check current connections of a Wowza Streaming Server.
 |:---------|:-------:|:------:|:----:|
 | Required |    +    |        |      |
 
-###@ Dependencies:
+### NPM Dependencies:
 * jsdom@0.2.13
 * optimist
 * request
 
-- [How to install node.js?](https://help.boundary.com/hc/articles/202360701)
-
 ### Plugin Setup
-None
+Works with Wowza Server v4. Requires WowzaStreamingEngineManager service to be running, Admin-basic authentication must be setup in the VHOST.XML under the connectioncounts area, and credentials must be set in publish.password.  
 
 #### Plugin Configuration Fields
 
 |Field Name |Description                                                                                           |
 |:----------|:-----------------------------------------------------------------------------------------------------|
-|URL        |The URL of the server to poll. Include Username and password. Ex.                                     |
-|           |                                              http://wowza:i-bcde6cef@localhost:8086/connectioncounts |
+|URL        |The URL of the server to poll. Example:  http://username:passsword@127.0.0.1:8086/connectioncounts    |
 |Interval   |Interval to run poll server at.  Defaults to 1000ms = 1 second                                        |
-|Source     |The Source to display in the legend for the Wowza data.  It will default to the hostname of the server|
+|Delay      |Delay to run the poll at.  Defaults to 1000ms = 1 second                                              |
+|Source     |The Source to display in the legend for the Wowza data.  It will default to Wowza-Stats               |
+
+
+### Metrics
+The following metrics are returned. 
+ * WOWZA_CONNECTIONS_CURRENT
+ * WOWZA_CONNECTIONS_TOTAL
+ * WOWZA_CONNECTIONS_BYTES_IN
+ * WOWZA_CONNECTIONS_BYTES_OUT

@@ -1,6 +1,6 @@
 {
  "description" : "Provides Wowza Connection Stats",
- "command" : "node index.js --uri=$(uri) --repeat=$(repeat) --delay=1000",
+ "command" : "node index.js",
  "metrics" : [
               "WOWZA_CONNECTIONS_CURRENT",
               "WOWZA_CONNECTIONS_TOTAL",
@@ -13,14 +13,6 @@
 
 
  "paramSchema": [
-        {
-            "title": "Source",
-            "name": "source",
-            "description": "Source to use for this connection. Defaults to the local hostname",
-            "type": "string",
-            "default": "Wowza_stats",
-            "required": true
-        },
         {
             "title": "URI",
             "name": "uri",
@@ -35,6 +27,22 @@
             "description": "Interval to run poll server at.  Defaults to 1000ms = 1 second",
             "type": "string",
             "default": "1000",
+            "required": true
+        },
+         {
+            "title": "Delay",
+            "name": "delay",
+            "description": "Delay to run the poll at.  Defaults to 1000ms = 1 second",
+            "type": "string",
+            "default": "1000",
+            "required": true
+        },
+        {
+            "title": "Source",
+            "name": "msource",
+            "description": "Source to use for this connection. Defaults to the Wowza_stats",
+            "type": "string",
+            "default": "Wowza_stats",
             "required": true
         }
  ]
