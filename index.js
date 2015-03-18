@@ -2,9 +2,11 @@
 //load parameters from file
 var _param = require('./param.json')
 
+var parseString = require('xml2js').parseString;
+
 
 // Requires.
-// request, jsdom, optimist, all of which can be install with npm.
+// request, xml2js, optimist, all of which can be install with npm.
 
 // NOTE: -----------------------------------------------------------------------
 // Uses jsdom 0.2.13, 0.2.14 has a bug
@@ -14,12 +16,11 @@ var _param = require('./param.json')
 
 // Require modules.
 var request = require('request'),
-    jsdom = require('jsdom'),
     argv = require('optimist').argv;
 
 // Make sure that at least the --uri argument was passed.
 if (_param.uri.length == 0) {
-  console.log('URI Required! Script should be called with one argument which is the URI of the connectioncounts HTTP provider to query.');
+  console.error('URI Required! Script should be called with one argument which is the URI of the connectioncounts HTTP provider to query.');
   return;
 }
 
@@ -31,24 +32,28 @@ var Collector = {
   get_stats: function(uri, callback) {
     request({ uri: _param.uri }, function (error, response, body) {
       if (error && response.statusCode !== 200) {
-        console.log('Error when contacting ' + _param.uri);
-      }
+        console.error('Error when contacting ' + _param.uri);
+      } else {
 
-      jsdom.env({
-        html: body,
-        scripts: [
-          'http://code.jquery.com/jquery.min.js'
-        ]
-      }, function (err, window) {
-        // User jQuery to Gather some stats from the connectioncounts HTTP
-        // provider.
-        var $ = window.jQuery;
-        Collector.stats['WOWZA_CONNECTIONS_CURRENT'] = parseInt($('ConnectionsCurrent').html());
-        Collector.stats['WOWZA_CONNECTIONS_TOTAL'] = parseInt($('ConnectionsTotal').html());
-        Collector.stats['WOWZA_CONNECTIONS_BYTES_IN'] = parseFloat($('MessagesInBytesRate').html());
-        Collector.stats['WOWZA_CONNECTIONS_BYTES_OUT'] = parseFloat($('MessagesOutBytesRate').html());
-        callback(window);
-      });
+        // Our body is XML document so handle as follows:
+        // 1) Parse the XML
+        // 2) Check for a parse error
+        // 3) If no errors, populate stats object
+        // 4) Invoke the callback passing the stats object
+        parseString(body, function (err, result) {
+
+	   if (err) {
+              console.error(err)
+           } else {
+             var stats = {}
+             stats.WOWZA_CONNECTIONS_CURRENT = parseInt(result.WowzaStreamingEngine.ConnectionsCurrent);
+             stats.WOWZA_CONNECTIONS_TOTAL = parseInt(result.WowzaStreamingEngine.ConnectionsTotal);
+             stats.WOWZA_CONNECTIONS_BYTES_IN = parseFloat(result.WowzaStreamingEngine.MessagesInBytesRate);
+             stats.WOWZA_CONNECTIONS_BYTES_OUT = parseFloat(result.WowzaStreamingEngine.MessagesOutBytesRate);
+             callback(stats);
+           }
+       });
+      }
     });
   },
  }
@@ -57,13 +62,11 @@ var Collector = {
  * Wrap Collector.get_stats call in a closure it works better with setInterval.
  */
 var callDelay = function() {
-  Collector.get_stats(argv.uri, function(response) {
-    // Print out collected stats.
-    //console.log(Collector.stats);
-    console.log('WOWZA_CONNECTIONS_CURRENT ' + Collector.stats.WOWZA_CONNECTIONS_CURRENT + ' ' + _param.msource);
-    console.log('WOWZA_CONNECTIONS_TOTAL ' + Collector.stats.WOWZA_CONNECTIONS_TOTAL + ' ' + _param.msource)
-    console.log('WOWZA_CONNECTIONS_BYTES_IN ' + Collector.stats.WOWZA_CONNECTIONS_BYTES_IN + ' ' + _param.msource)
-    console.log('WOWZA_CONNECTIONS_BYTES_OUT ' + Collector.stats.WOWZA_CONNECTIONS_BYTES_OUT + ' ' + _param.msource)
+  Collector.get_stats(argv.uri, function(stats) {
+    console.log('WOWZA_CONNECTIONS_CURRENT ' + stats.WOWZA_CONNECTIONS_CURRENT + ' ' + _param.msource);
+    console.log('WOWZA_CONNECTIONS_TOTAL ' + stats.WOWZA_CONNECTIONS_TOTAL + ' ' + _param.msource)
+    console.log('WOWZA_CONNECTIONS_BYTES_IN ' + stats.WOWZA_CONNECTIONS_BYTES_IN + ' ' + _param.msource)
+    console.log('WOWZA_CONNECTIONS_BYTES_OUT ' + stats.WOWZA_CONNECTIONS_BYTES_OUT + ' ' + _param.msource)
   });
 }
 
