@@ -13,7 +13,7 @@ Plugin to check current connections of a Wowza Streaming Server.
 | Required |    +    |        |      |
 
 ### NPM Dependencies:
-* jsdom@0.2.13
+* xml2js
 * optimist
 * request
 
